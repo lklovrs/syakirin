@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav>
+        <a href="index.html">Home</a>
+        <a href="infopage.html">Info Page</a>
+        <a href="bmi.html">BMI Calculator</a>
+    </nav>
+	
+    <h1>BMI Calculator</h1>
+    <form id="bmiForm">
+        <label for="weight">Weight (kg):</label>
+        <input type="text" id="weight" name="weight" placeholder="Enter your weight" required>
+
+        <label for="height">Height (cm):</label>
+        <input type="text" id="height" name="height" placeholder="Enter your height" required>
+        
+        <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+    </form>
+    
+    <p id="bmiResult"></p>
+
+    <div id="info">
+        <h2>BMI Categories</h2>
+        <div class="bmi-box">
+            <p><strong>Underweight:</strong> BMI less than 18.5. This may indicate that you are underweight. Consider consulting a healthcare provider to ensure you are healthy.</p>
+        </div>
+        <div class="bmi-box">
+            <p><strong>Normal weight:</strong> BMI between 18.5 and 24.9. This is considered a healthy weight range. Maintain a balanced diet and regular physical activity to stay within this range.</p>
+        </div>
+        <div class="bmi-box">
+            <p><strong>Overweight:</strong> BMI between 25 and 29.9. Being overweight can increase the risk of health issues such as diabetes and heart disease. Consider making lifestyle changes, including a healthier diet and more exercise.</p>
+        </div>
+        <div class="bmi-box">
+            <p><strong>Obesity:</strong> BMI of 30 or higher. Obesity poses significant health risks, including heart disease, diabetes, and certain cancers. It's important to consult a healthcare professional for personalized advice and support.</p>
+        </div>
+    </div>
+    
+    <script>
+        function calculateBMI() {
+            const weightText = document.getElementById('weight').value;
+            const heightText = document.getElementById('height').value;
+
+            const weight = parseFloat(weightText);
+            const height = parseFloat(heightText) / 100; 
+
+            if (!isNaN(weight) && weight > 0 && !isNaN(height) && height > 0) {
+                const bmi = weight / (height * height);
+                let category = '';
+
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                } else if (bmi < 24.9) {
+                    category = 'Normal weight';
+                } else if (bmi < 29.9) {
+                    category = 'Overweight';
+                } else {
+                    category = 'Obesity';
+                }
+
+                document.getElementById('bmiResult').textContent = `Your BMI is ${bmi.toFixed(2)} (${category})`;
+            } else {
+                document.getElementById('bmiResult').textContent = 'Please enter valid weight and height.';
+            }
+        }
+    </script>
+
+    <footer>
+        <p>© 2024 Nurul Syakirin. All rights reserved.</p>
+    </footer>
+</body>
+</html>
